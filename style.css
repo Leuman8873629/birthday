@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none;
 }
 
 body {
@@ -11,61 +12,58 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(-45deg, #fee9f7, #e8f5fe, #fef2e8, #f0ffe8);
+    background: linear-gradient(-45deg, #1e1b4b, #312e81, #3b2f80, #1e1b4b);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
-    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+    font-family: 'Outfit', sans-serif;
     overflow: hidden;
     position: relative;
-}
-
-.cursor {
-    width: 20px;
-    height: 20px;
-    background: pink;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    mix-blend-mode: difference;
-    transition: transform 0.2s;
 }
 
 .container {
     text-align: center;
     z-index: 1;
+    padding: 1.5rem;
 }
 
 h1 {
     font-size: 3.5rem;
-    color: #ff69b4;
-    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    font-weight: 700;
+    color: #c4b7e6;
+    text-shadow: 0 0 20px rgba(167, 139, 250, 0.5), 0 0 40px rgba(167, 139, 250, 0.2);
     margin-bottom: 2rem;
     opacity: 0;
+    letter-spacing: 1px;
 }
 
 .greeting {
-    font-size: 1.5rem;
-    color: #8a2be2;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #f0eaf8;
     margin-bottom: 3rem;
     min-height: 2em;
+    text-shadow: 0 0 10px rgba(196, 183, 230, 0.3);
 }
 
 .cta-button {
-    padding: 1rem 2rem;
+    padding: 1rem 2.5rem;
     font-size: 1.2rem;
-    background: linear-gradient(45deg, #ff69b4, #ff99cc);
-    border: none;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    background: linear-gradient(135deg, #6d5dbc, #a78bfa);
+    border: 1px solid rgba(167, 139, 250, 0.3);
     border-radius: 50px;
-    color: white;
+    color: #f0eaf8;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
     opacity: 0;
+    backdrop-filter: blur(4px);
 }
 
 .cta-button:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+    box-shadow: 0 0 35px rgba(167, 139, 250, 0.6), 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .floating {
@@ -80,8 +78,31 @@ h1 {
     100% { background-position: 0% 50%; }
 }
 
+/* ── Mobile Responsive ── */
 @media (max-width: 768px) {
-    h1 { font-size: 2rem; }
-    .greeting { font-size: 1.2rem; }
-    .cta-button { font-size: 1rem; }
+    h1 {
+        font-size: 2rem;
+        padding: 0 0.5rem;
+    }
+    .greeting {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    .cta-button {
+        font-size: 1rem;
+        padding: 0.9rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    .greeting {
+        font-size: 1rem;
+    }
+    .cta-button {
+        font-size: 0.95rem;
+        padding: 0.85rem 1.8rem;
+    }
 }

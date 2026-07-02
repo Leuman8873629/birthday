@@ -1,23 +1,23 @@
  // Reasons database
  const reasons = [
     { 
-        text: "You’re such a kind and wonderful person, and I feel lucky to share such a good bond with you. 💖", 
-        emoji: "🌟",
+        text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you. 💜", 
+        emoji: "🌙",
         gif: "gif1.gif"
     },
     { 
         text: "May your day be filled with love, laughter, and endless joy. 🌸 ", 
-        emoji: "💗",
+        emoji: "💜",
         gif: "gif2.gif"
     },
     { 
         text: "Wishing you success, happiness, and everything your heart desires. ✨ ", 
-        emoji: "💕",
+        emoji: "🦋",
         gif: "gif1.gif"
     },
     { 
         text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳 ", 
-        emoji: "🌟",
+        emoji: "⭐",
         gif: "gif2.gif"
     }
 ];
@@ -78,16 +78,22 @@ function displayNewReason() {
                 onComplete: () => {
                     shuffleButton.textContent = "Enter Our Storylane 💫";
                     shuffleButton.classList.add('story-mode');
-                    shuffleButton.addEventListener('click', () => {
-                        gsap.to('body', {
-                            opacity: 0,
-                            duration: 1,
-                            onComplete: () => {
-                                window.location.href = 'last.html'; // Replace with the actual URL of the next page
-                            }
-                        });
-                    });
                 }
+            });
+
+            // Animate and reveal the Teddy Hug ending section
+            gsap.to('.teddy-hug', {
+                scale: 1,
+                duration: 1,
+                delay: 0.2,
+                ease: "elastic.out(1, 0.75)"
+            });
+            gsap.to('.ending-text', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.4,
+                ease: "power2.out"
             });
         }
 
@@ -97,15 +103,24 @@ function displayNewReason() {
         setTimeout(() => {
             isTransitioning = false;
         }, 500);
-    } else {
-        // Handle navigation to new page or section
-        window.location.href = "#storylane";
-        // Or trigger your next page functionality
     }
 }
 
-// Initialize button click
+// Initialize button click — single listener handles both modes
 shuffleButton.addEventListener('click', () => {
+    // If in story mode, navigate to last page
+    if (shuffleButton.classList.contains('story-mode')) {
+        gsap.to('body', {
+            opacity: 0,
+            duration: 1,
+            onComplete: () => {
+                window.location.href = 'last.html';
+            }
+        });
+        return;
+    }
+
+    // Otherwise, show next reason with a bounce
     gsap.to(shuffleButton, {
         scale: 0.9,
         duration: 0.1,
@@ -115,9 +130,9 @@ shuffleButton.addEventListener('click', () => {
     displayNewReason();
 });
 
-// Floating elements function (same as before)
+// Floating elements — Hinata themed
 function createFloatingElement() {
-    const elements = ['🌸', '✨', '💖', '🦋', '⭐'];
+    const elements = ['🌙', '✨', '💜', '🦋', '⭐'];
     const element = document.createElement('div');
     element.className = 'floating';
     element.textContent = elements[Math.floor(Math.random() * elements.length)];
@@ -126,23 +141,16 @@ function createFloatingElement() {
     element.style.fontSize = (Math.random() * 20 + 10) + 'px';
     document.body.appendChild(element);
 
-    gsap.to(element, {
-        y: -500,
-        duration: Math.random() * 10 + 10,
-        opacity: 0,
-        onComplete: () => element.remove()
-    });
+    const duration = Math.random() * 10 + 10;
+    gsap.timeline({ onComplete: () => element.remove() })
+        .to(element, { opacity: 0.8, duration: 1 })
+        .to(element, {
+            y: -500,
+            duration: duration,
+            ease: "none"
+        }, 0)
+        .to(element, { opacity: 0, duration: 1.5 }, duration - 1.5);
 }
-
-// Custom cursor (same as before)
-const cursor = document.querySelector('.custom-cursor');
-document.addEventListener('mousemove', (e) => {
-    gsap.to(cursor, {
-        x: e.clientX - 15,
-        y: e.clientY - 15,
-        duration: 0.2
-    });
-});
 
 // Create initial floating elements
 setInterval(createFloatingElement, 2000);
